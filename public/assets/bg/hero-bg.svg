@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="hero-base-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F6B"/>
+      <stop offset="55%" stop-color="#1E40D8"/>
+      <stop offset="100%" stop-color="#0B1F6B"/>
+    </linearGradient>
+    <linearGradient id="wave1" x1="0%" y1="30%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#1E40D8" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0B1F6B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#1E40D8" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0B1F6B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="circuit-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1E40D8" stop-opacity="0.3"/>
+    </linearGradient>
+    <pattern id="hero-circuit" width="160" height="160" patternUnits="userSpaceOnUse">
+      <path d="M 0 40 L 40 40 L 60 60 L 120 60 L 140 40 L 160 40 M 40 120 L 70 120 L 90 100 L 130 100 L 150 120 L 160 120 M 80 0 L 80 30 L 100 50 L 100 80 M 20 160 L 20 130 L 0 110" fill="none" stroke="#22B8F0" stroke-width="1.2" stroke-opacity="0.18"/>
+      <circle cx="40" cy="40" r="2.5" fill="#22B8F0" fill-opacity="0.25"/>
+      <circle cx="120" cy="60" r="2" fill="#22B8F0" fill-opacity="0.25"/>
+      <circle cx="90" cy="100" r="2.5" fill="#22B8F0" fill-opacity="0.25"/>
+      <circle cx="100" cy="80" r="2" fill="#22B8F0" fill-opacity="0.25"/>
+      <path d="M 60 160 L 60 140 L 80 120" fill="none" stroke="#22B8F0" stroke-width="1" stroke-opacity="0.12"/>
+    </pattern>
+    <radialGradient id="hero-ambient-cyan" cx="85%" cy="20%" r="45%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#1E40D8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0B1F6B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Deep Navy Base -->
+  <rect width="1440" height="600" fill="url(#hero-base-grad)"/>
+
+  <!-- Creatica Wave Layer 1 -->
+  <path d="M 0,380 C 280,310 420,490 720,410 C 1020,330 1180,480 1440,360 L 1440,600 L 0,600 Z" fill="url(#wave1)"/>
+
+  <!-- Creatica Wave Layer 2 -->
+  <path d="M 0,440 C 320,520 540,360 860,430 C 1140,490 1320,380 1440,410 L 1440,600 L 0,600 Z" fill="url(#wave2)"/>
+
+  <!-- Creatica Wave Crest Line -->
+  <path d="M 0,380 C 280,310 420,490 720,410 C 1020,330 1180,480 1440,360" fill="none" stroke="#22B8F0" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Ambient Glow -->
+  <rect width="1440" height="600" fill="url(#hero-ambient-cyan)"/>
+
+  <!-- BGJar Circuit Board Overlay (12% opacity) -->
+  <rect width="1440" height="600" fill="url(#hero-circuit)" opacity="0.85"/>
+</svg>

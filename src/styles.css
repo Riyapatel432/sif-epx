@@ -1,0 +1,1043 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1B2336;
+  --color-navy-900: #031A5D;
+  --color-navy-700: #023E92;
+  --color-blue-600: #004999;
+  --color-royal: #1E3AAE;
+  --color-steel: #28599B;
+  --color-cyan: #22B8F0;
+  --color-ice-100: #E0F2FE;
+  --color-ice-50: #F3FAFE;
+  --color-ok: #12B76A;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+}
+
+@keyframes glowDrift1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  50% { transform: translate(40px, 30px) scale(1.08); opacity: 0.95; }
+  100% { transform: translate(-30px, -20px) scale(0.96); opacity: 0.75; }
+}
+
+@keyframes glowDrift2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50px, 40px) scale(1.12); opacity: 0.9; }
+  100% { transform: translate(30px, -30px) scale(0.95); opacity: 0.65; }
+}
+
+@keyframes glowDrift3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(25px, -35px) scale(1.06); opacity: 0.8; }
+  100% { transform: translate(-25px, 25px) scale(0.98); opacity: 0.55; }
+}
+
+@layer base {
+  :root {
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+    --primary: #00229c;
+    --primary-hover: #001a75;
+    --primary-light: #1d4ed8;
+    --accent: #2563eb;
+    --accent-sky: #38bdf8;
+    --surface-dark: #080c14;
+    --surface-navy: #0b1329;
+    --surface-card: #0f1a36;
+    --surface-light: #f8fafc;
+    --surface-border: #e2e8f0;
+    --silver-metallic: #94a3b8;
+    --silver-light: #cbd5e1;
+
+    /* MASTER DESIGN SYSTEM TOKENS */
+    --ink-900: #1B2336;      /* top utility bar, deep text */
+    --navy-900: #031A5D;     /* hero gradient start */
+    --navy-700: #023E92;     /* hero gradient mid */
+    --blue-600: #004999;     /* hero gradient end, links */
+    --royal-600: #1E3AAE;    /* primary buttons (GET A QUOTE) */
+    --steel-500: #28599B;    /* newsletter band and footer base */
+    --cyan-400: #22B8F0;     /* accent, icons, highlights */
+    --ice-100: #E0F2FE;      /* section backgrounds */
+    --ice-50: #F3FAFE;       /* page background */
+    --ok-500: #12B76A;       /* status dots and check icons only */
+    --white: #FFFFFF;
+
+    /* SIF-EPX Brand Palette Compatibility */
+    --brand-navy: #031A5D;
+    --brand-royal: #1E3AAE;
+    --brand-cyan: #22B8F0;
+    --brand-ice: #F3FAFE;
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --shadow-soft: 0 10px 30px -10px rgba(3, 26, 93, 0.08);
+    --shadow-soft-lg: 0 20px 40px -15px rgba(3, 26, 93, 0.16);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--ink-900);
+    background-color: var(--ice-50);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  #app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* SIF-EPX Master Design System SVG Background Classes */
+.bg-sif-hero {
+  background-color: var(--navy-900);
+  background-image: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 50%, var(--blue-600) 100%), url('/assets/bg/hero-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-gradient-dark {
+  background: linear-gradient(135deg, #031A5D 0%, #023E92 50%, #004999 100%);
+}
+
+.bg-sif-standards {
+  background-color: var(--ice-50);
+  background-image: url('/assets/bg/standards-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-sif-sector-grid {
+  background-color: var(--ice-50);
+  background-image: url('/assets/bg/sector-grid-bg.svg');
+  background-repeat: repeat;
+  background-size: 80px 80px;
+}
+
+.bg-sif-cta {
+  background-color: var(--navy-900);
+  background-image: url('/assets/bg/cta-banner-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Sector & Feature Card Hover Corner Texture */
+.sector-card-corner {
+  background-image: url('/assets/bg/card-corner-texture.svg');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: 140px 140px;
+}
+
+/* Industrial & Scientific Blueprint Patterns */
+.bg-industrial-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0, 34, 156, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 34, 156, 0.05) 1px, transparent 1px);
+}
+
+.bg-dark-grid {
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(0, 34, 156, 0.12) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+.bg-dot-matrix-dark {
+  background-image: radial-gradient(rgba(56, 189, 248, 0.15) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Chemical Molecular Accents & Gradients */
+.gradient-chemical {
+  background: linear-gradient(135deg, #00229c 0%, #1e3a8a 50%, #0b1329 100%);
+}
+
+.gradient-dark-overlay {
+  background: linear-gradient(180deg, rgba(8, 12, 20, 0.2) 0%, rgba(8, 12, 20, 0.85) 70%, #080c14 100%);
+}
+
+.gradient-radial-blue {
+  background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 60%);
+}
+
+/* Glowing Blueprint Elements */
+.glow-primary {
+  box-shadow: 0 0 35px -5px rgba(0, 34, 156, 0.35);
+}
+
+.glow-sky {
+  box-shadow: 0 0 30px -5px rgba(56, 189, 248, 0.3);
+}
+
+.glow-border-blue {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+}
+
+/* Smooth Image Zoom on Container Hover */
+.group:hover .img-scale {
+  transform: scale(1.05);
+}
+
+.img-scale {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Marquee & Continuous Motion Keyframes */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Pulse Beacon */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080c14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Hide scrollbar for mobile touch slider components */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ========================================================================= */
+/* SIF HOME DESIGN TOKENS (Part B - Golden Rule Reusable Classes)            */
+/* ========================================================================= */
+
+.section-sky-a {
+  background: linear-gradient(to bottom, #F0F9FF, #ffffff, #E0F2FE);
+  border-bottom: 1px solid #bae6fd;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-sky-a {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.section-sky-b {
+  background: linear-gradient(to bottom, rgba(224, 242, 254, 0.6), #ffffff, #F0F9FF);
+  border-bottom: 1px solid #bae6fd;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-sky-b {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.875rem;
+  border-radius: 9999px;
+  background-color: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #001B79;
+}
+
+.card-sky {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid #bae6fd;
+  box-shadow: 0 4px 6px -1px rgba(224, 242, 254, 0.6), 0 2px 4px -2px rgba(224, 242, 254, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-sky:hover {
+  border-color: #0284C7;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(186, 230, 253, 0.6);
+}
+
+.btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #001B79, #00229C, #0284C7);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  box-shadow: 0 10px 15px -3px rgba(186, 230, 253, 0.8);
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.btn-pill-primary:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.btn-pill-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  border: 1.5px solid #7dd3fc;
+  color: #001B79;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.btn-pill-secondary:hover {
+  background-color: #f0f9ff;
+  border-color: #0284c7;
+}
+
+/* Hero Section Subtle Engineering Animations */
+@keyframes hero-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes hero-float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hero-steam-drift {
+  0% {
+    transform: translateY(0px) scale(0.95);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-16px) scale(1.1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-30px) scale(1.25);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-pipe-flow {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hero-chart-draw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-hero-steam-1 {
+  animation: hero-steam-drift 6.5s ease-out infinite;
+}
+
+.animate-hero-steam-2 {
+  animation: hero-steam-drift 7.5s ease-out infinite 2.2s;
+}
+
+.animate-hero-steam-3 {
+  animation: hero-steam-drift 8s ease-out infinite 4.2s;
+}
+
+.animate-pipe-flow {
+  animation: hero-pipe-flow 2.4s linear infinite;
+}
+
+.animate-chart-draw {
+  stroke-dasharray: 120;
+  animation: hero-chart-draw 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-steam-1,
+  .animate-hero-steam-2,
+  .animate-hero-steam-3,
+  .animate-pipe-flow,
+  .animate-chart-draw {
+    animation: none !important;
+  }
+}
+
+/* ========================================================================= */
+/* SIF SYSTEMS & SIF-EPX GROUP — ANIMATED VECTOR ICONS KEYFRAMES & UTILITIES  */
+/* ========================================================================= */
+
+/* 1. Medal ribbon swing */
+@keyframes sif-ribbon-swing {
+  0%, 100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.sif-anim-ribbon-swing {
+  animation: sif-ribbon-swing 3s ease-in-out infinite;
+}
+
+/* 2. Lightning spark pulse */
+@keyframes sif-spark-pulse {
+  0%, 75% {
+    transform: scale(0.6);
+    opacity: 0.15;
+  }
+  85% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  95%, 100% {
+    transform: scale(0.6);
+    opacity: 0.15;
+  }
+}
+
+.sif-anim-spark-pulse {
+  animation: sif-spark-pulse 3s ease-in-out infinite;
+}
+
+/* 3. Globe meridian rotation */
+@keyframes sif-globe-drift {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-24px);
+  }
+}
+
+.sif-anim-globe-track {
+  animation: sif-globe-drift 4s linear infinite;
+}
+
+/* 4. Shield check mark drawing */
+@keyframes sif-tick-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sif-anim-shield-tick {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 0;
+}
+
+.in-view .sif-anim-shield-tick {
+  animation: sif-tick-draw 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 5. Compliance tick loop */
+@keyframes sif-tick-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-2.5px);
+    opacity: 1;
+  }
+}
+
+.sif-anim-tick-bounce {
+  animation: sif-tick-bounce 2.6s ease-in-out infinite;
+}
+
+/* 6. Map pin ripple */
+@keyframes sif-pin-ripple {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.sif-anim-pin-ripple {
+  transform-origin: 24px 34px;
+  animation: sif-pin-ripple 2.5s ease-out infinite;
+}
+
+.sif-anim-pin-ripple-delayed {
+  transform-origin: 24px 34px;
+  animation: sif-pin-ripple 2.5s ease-out infinite 1.25s;
+}
+
+/* 7. Vision eye pupil drift & blink */
+@keyframes sif-pupil-drift {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(2.5px);
+  }
+  75% {
+    transform: translateX(-2.5px);
+  }
+}
+
+@keyframes sif-eye-blink {
+  0%, 94%, 100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.08);
+  }
+}
+
+.sif-anim-pupil-drift {
+  animation: sif-pupil-drift 4s ease-in-out infinite;
+}
+
+.sif-anim-eye-blink {
+  animation: sif-eye-blink 5s ease-in-out infinite;
+}
+
+/* 8. Mission target arrow strike */
+@keyframes sif-arrow-strike {
+  0% {
+    transform: translate(20px, -20px);
+    opacity: 0;
+  }
+  65% {
+    transform: translate(-1.5px, 1.5px);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(0.8px, -0.8px);
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.sif-anim-arrow-strike {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.in-view .sif-anim-arrow-strike {
+  animation: sif-arrow-strike 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 9. Ethics heart subtle pulse */
+@keyframes sif-heart-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.sif-anim-heart-pulse {
+  animation: sif-heart-pulse 2.8s ease-in-out infinite;
+}
+
+/* 10. Timeline marker ping */
+@keyframes sif-timeline-ping {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.in-view .sif-anim-timeline-ping {
+  animation: sif-timeline-ping 2s cubic-bezier(0, 0, 0.2, 1) 1 forwards;
+}
+
+/* 11. Executive star twinkle */
+@keyframes sif-star-twinkle {
+  0%, 100% {
+    transform: scale(0.9) rotate(0deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.15) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+.sif-anim-star-twinkle {
+  animation: sif-star-twinkle 3.2s ease-in-out infinite;
+}
+
+/* 12. Eyebrow Gear rotation */
+@keyframes sif-gear-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sif-anim-gear-spin {
+  animation: sif-gear-spin 30s linear infinite;
+}
+
+/* 13. Factory rising smoke puffs */
+@keyframes sif-smoke-puff {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-8px) scale(1.3);
+    opacity: 0;
+  }
+}
+
+.sif-anim-smoke-1 {
+  animation: sif-smoke-puff 2.2s ease-out infinite;
+}
+
+.sif-anim-smoke-2 {
+  animation: sif-smoke-puff 2.2s ease-out infinite 1.1s;
+}
+
+/* 14. Long-term Association: Handshake slide */
+@keyframes sif-hand-left {
+  0% {
+    transform: translateX(-6px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sif-hand-right {
+  0% {
+    transform: translateX(6px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.in-view .sif-anim-hand-left {
+  animation: sif-hand-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.in-view .sif-anim-hand-right {
+  animation: sif-hand-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 15. Calendar arrow slide */
+@keyframes sif-cal-arrow {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+.sif-anim-cal-arrow {
+  animation: sif-cal-arrow 2.4s ease-in-out infinite;
+}
+
+/* 16. Wrench hover rotation */
+.group:hover .sif-anim-wrench-arm,
+.sif-anim-wrench-hover:hover .sif-anim-wrench-arm {
+  transform: rotate(15deg);
+  transition: transform 0.35s ease-in-out;
+}
+
+.sif-anim-wrench-arm {
+  transition: transform 0.35s ease-in-out;
+}
+
+/* 17. Document check tick draw */
+@keyframes sif-doc-tick {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sif-anim-doc-tick {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 0;
+}
+
+.in-view .sif-anim-doc-tick {
+  animation: sif-doc-tick 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 18. Repeat arrows spin */
+@keyframes sif-repeat-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sif-anim-repeat-spin {
+  animation: sif-repeat-spin 12s linear infinite;
+}
+
+/* 19. Paperplane hover nudge */
+.group:hover .sif-paperplane-wing,
+button:hover .sif-paperplane-wing {
+  transform: translate(3px, -2px);
+  transition: transform 0.25s ease-out;
+}
+
+.sif-paperplane-wing {
+  transition: transform 0.25s ease-out;
+}
+
+/* 20. CTA arrow slide on hover */
+.group:hover .sif-cta-arrow-slide,
+a:hover .sif-cta-arrow-slide,
+button:hover .sif-cta-arrow-slide {
+  transform: translateX(4px);
+  transition: transform 0.25s ease-out;
+}
+
+.sif-cta-arrow-slide {
+  transition: transform 0.25s ease-out;
+}
+
+/* 21. Phone wiggle on hover */
+@keyframes sif-phone-wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-8deg);
+  }
+  80% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.sif-phone-wiggle-trigger:hover .sif-phone-wiggle-body,
+a:hover .sif-phone-wiggle-trigger .sif-phone-wiggle-body {
+  animation: sif-phone-wiggle 0.7s ease-in-out 1;
+}
+
+/* 22. Verified Tier-1 check tick on card hover */
+@keyframes sif-tier1-tick {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.group:hover .sif-anim-tier1-tick {
+  stroke-dasharray: 14;
+  animation: sif-tier1-tick 0.5s ease-out forwards;
+}
+
+/* Pausing infinite animations when section is offscreen (IntersectionObserver performance) */
+.section-anim-paused * {
+  animation-play-state: paused !important;
+}
+
+/* Accessibility: prefers-reduced-motion override */
+@media (prefers-reduced-motion: reduce) {
+  .sif-anim-ribbon-swing,
+  .sif-anim-spark-pulse,
+  .sif-anim-globe-track,
+  .sif-anim-shield-tick,
+  .sif-anim-tick-bounce,
+  .sif-anim-pin-ripple,
+  .sif-anim-pin-ripple-delayed,
+  .sif-anim-pupil-drift,
+  .sif-anim-eye-blink,
+  .sif-anim-arrow-strike,
+  .sif-anim-heart-pulse,
+  .sif-anim-timeline-ping,
+  .sif-anim-star-twinkle,
+  .sif-anim-gear-spin,
+  .sif-anim-smoke-1,
+  .sif-anim-smoke-2,
+  .sif-anim-hand-left,
+  .sif-anim-hand-right,
+  .sif-anim-cal-arrow,
+  .sif-anim-wrench-arm,
+  .sif-anim-doc-tick,
+  .sif-anim-repeat-spin,
+  .sif-paperplane-wing,
+  .sif-cta-arrow-slide,
+  .sif-phone-wiggle-body,
+  .sif-anim-tier1-tick {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* ========================================================================= */
+/* MOBILE RESPONSIVE FOUNDATION & NATIVE APP PATTERNS                         */
+/* Breakpoints: 320, 360, 375, 390, 414, 768, 1024, 1280, 1440               */
+/* ========================================================================= */
+
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* Viewport box bounds */
+html, body {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Prevent auto-zoom on iOS inputs when font size is less than 16px */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Native Horizontal Swipe Snap Carousel for Mobile */
+.mobile-snap-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-inline-start: 1rem;
+  scrollbar-width: none;
+}
+
+.mobile-snap-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-snap-item {
+  flex: 0 0 calc(85% - 0.5rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 640px) {
+  .mobile-snap-item {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-snap-carousel {
+    display: grid;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+  .mobile-snap-item {
+    flex: none;
+    scroll-snap-align: unset;
+  }
+}
+
+/* Hide scrollbars cleanly across browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fluid responsive typography helpers */
+.text-fluid-h1 {
+  font-size: clamp(1.85rem, 5vw + 1rem, 3.75rem);
+  line-height: 1.15;
+}
+
+.text-fluid-h2 {
+  font-size: clamp(1.5rem, 3.5vw + 0.8rem, 2.75rem);
+  line-height: 1.2;
+}
+
+.text-fluid-p {
+  font-size: clamp(0.875rem, 1.2vw + 0.5rem, 1.125rem);
+  line-height: 1.6;
+}
+
+/* Touch friendly minimum target sizing */
+.touch-target-min {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Bottom safe-area padding for mobile sticky action bar */
+.pb-mobile-nav {
+  padding-bottom: calc(4.5rem + var(--safe-bottom));
+}
+
+@media (min-width: 1024px) {
+  .pb-mobile-nav {
+    padding-bottom: 0;
+  }
+}

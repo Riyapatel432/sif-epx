@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <!-- Geometric Icon Grid / Tech Blueprint Pattern (5% opacity) -->
+    <pattern id="sector-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+      <!-- 40px fine grid -->
+      <line x1="0" y1="0" x2="80" y2="0" stroke="#1E40D8" stroke-width="0.75" stroke-opacity="0.04"/>
+      <line x1="0" y1="40" x2="80" y2="40" stroke="#1E40D8" stroke-width="0.5" stroke-opacity="0.025"/>
+      <line x1="0" y1="0" x2="0" y2="80" stroke="#1E40D8" stroke-width="0.75" stroke-opacity="0.04"/>
+      <line x1="40" y1="0" x2="40" y2="80" stroke="#1E40D8" stroke-width="0.5" stroke-opacity="0.025"/>
+      <!-- Crosshairs at intersections -->
+      <path d="M 37 40 L 43 40 M 40 37 L 40 43" stroke="#22B8F0" stroke-width="0.8" stroke-opacity="0.06"/>
+      <path d="M 77 80 L 83 80 M 80 77 L 80 83" stroke="#22B8F0" stroke-width="0.8" stroke-opacity="0.06"/>
+      <!-- Subtle angled tick -->
+      <line x1="0" y1="0" x2="6" y2="6" stroke="#1E40D8" stroke-width="0.7" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="800" fill="transparent"/>
+  <rect width="800" height="800" fill="url(#sector-grid-pattern)"/>
+</svg>

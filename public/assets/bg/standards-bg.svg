@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <!-- Hexagon Grid Pattern on Ice Blue Background #EAF4FF -->
+    <pattern id="standards-hex" width="56" height="97" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+      <path d="M 28 0 L 56 16.2 L 56 48.5 L 28 64.7 L 0 48.5 L 0 16.2 Z" fill="none" stroke="#1E40D8" stroke-width="0.8" stroke-opacity="0.08"/>
+      <path d="M 28 97 L 56 80.8 L 56 48.5 L 28 64.7 L 0 48.5 L 0 80.8 Z" fill="none" stroke="#22B8F0" stroke-width="0.8" stroke-opacity="0.06"/>
+      <circle cx="28" cy="64.7" r="1.5" fill="#22B8F0" fill-opacity="0.18"/>
+      <circle cx="0" cy="48.5" r="1.2" fill="#1E40D8" fill-opacity="0.15"/>
+      <circle cx="56" cy="48.5" r="1.2" fill="#1E40D8" fill-opacity="0.15"/>
+    </pattern>
+    <linearGradient id="ice-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EAF4FF"/>
+      <stop offset="50%" stop-color="#F2F8FF"/>
+      <stop offset="100%" stop-color="#EAF4FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" fill="url(#ice-grad)"/>
+  <rect width="1200" height="400" fill="url(#standards-hex)"/>
+</svg>

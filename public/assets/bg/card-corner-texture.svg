@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none" aria-hidden="true">
+  <defs>
+    <pattern id="card-corner-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="1.25" fill="#22B8F0" fill-opacity="0.28"/>
+    </pattern>
+    <linearGradient id="corner-fade" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="fade-mask">
+      <rect width="160" height="160" fill="url(#corner-fade)"/>
+    </mask>
+  </defs>
+
+  <rect width="160" height="160" fill="url(#card-corner-dots)" mask="url(#fade-mask)"/>
+  <!-- Subtle contour corner accents -->
+  <path d="M 120 160 Q 140 140 160 120" stroke="#1E40D8" stroke-width="1" stroke-opacity="0.18" fill="none"/>
+  <path d="M 100 160 Q 130 130 160 100" stroke="#22B8F0" stroke-width="1" stroke-opacity="0.22" fill="none"/>
+  <path d="M 80 160 Q 120 120 160 80" stroke="#1E40D8" stroke-width="0.75" stroke-opacity="0.12" fill="none"/>
+</svg>

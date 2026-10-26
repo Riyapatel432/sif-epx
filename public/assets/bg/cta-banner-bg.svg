@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <!-- Cyan to Royal Blue to Navy Gradient -->
+    <linearGradient id="cta-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F6B"/>
+      <stop offset="50%" stop-color="#1E40D8"/>
+      <stop offset="100%" stop-color="#22B8F0"/>
+    </linearGradient>
+
+    <!-- Stacked Polygon Luminary / Wave Form -->
+    <linearGradient id="poly-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E40D8" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <linearGradient id="poly-grad-2" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#22B8F0" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0B1F6B" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Faint Circuit Overlay for CTA -->
+    <pattern id="cta-circuit" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M 0 30 L 30 30 L 50 50 L 90 50 L 110 30 L 120 30 M 30 90 L 50 90 L 70 70 L 100 70 M 60 0 L 60 20 L 75 35" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.14"/>
+      <circle cx="30" cy="30" r="2" fill="#FFFFFF" fill-opacity="0.2"/>
+      <circle cx="90" cy="50" r="2" fill="#FFFFFF" fill-opacity="0.2"/>
+      <circle cx="70" cy="70" r="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <rect width="1440" height="400" fill="url(#cta-grad)"/>
+
+  <!-- Stacked Polygon Luminary Shapes -->
+  <polygon points="0,400 300,240 680,310 1120,180 1440,290 1440,400" fill="url(#poly-grad-1)"/>
+  <polygon points="0,400 220,150 540,260 920,120 1340,230 1440,160 1440,400" fill="url(#poly-grad-2)"/>
+  
+  <!-- Subtle facet stroke lines -->
+  <polyline points="0,400 300,240 680,310 1120,180 1440,290" fill="none" stroke="#22B8F0" stroke-width="1.5" stroke-opacity="0.35"/>
+  <polyline points="0,400 220,150 540,260 920,120 1340,230 1440,160" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.25"/>
+
+  <!-- Circuit Pattern Overlay -->
+  <rect width="1440" height="400" fill="url(#cta-circuit)"/>
+</svg>
