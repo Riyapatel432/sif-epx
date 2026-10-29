@@ -44,10 +44,20 @@ export default function PageHero({
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className={`${children ? 'lg:col-span-8' : 'lg:col-span-10'} space-y-5`}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className={`${children ? 'lg:col-span-8' : 'lg:col-span-10'} space-y-5`}
+          >
             
             {/* Eyebrow Pill with ShinyText */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-sky-300/40 backdrop-blur-md shadow-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-sky-300/40 backdrop-blur-md shadow-xs"
+            >
               <span className="w-2.5 h-2.5 rounded-full bg-[#22B8F0] animate-pulse" />
               <span className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-sky-200 font-bold">
                 <ShinyText text={eyebrow} speed={3.5} />
@@ -57,7 +67,7 @@ export default function PageHero({
                   {badge}
                 </span>
               )}
-            </div>
+            </motion.div>
 
             {/* High-Contrast Title with BlurText reveal */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] drop-shadow-sm">
@@ -71,17 +81,27 @@ export default function PageHero({
 
             {/* Subtitle */}
             {subtitle && (
-              <p className="text-sm sm:text-base md:text-lg text-sky-100 max-w-3xl leading-relaxed font-normal">
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="text-sm sm:text-base md:text-lg text-sky-100 max-w-3xl leading-relaxed font-normal"
+              >
                 {subtitle}
-              </p>
+              </motion.p>
             )}
-          </div>
+          </motion.div>
 
           {/* Right-side visual slot */}
           {children && (
-            <div className="lg:col-span-4 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-4 flex justify-center lg:justify-end"
+            >
               {children}
-            </div>
+            </motion.div>
           )}
         </div>
       </div>

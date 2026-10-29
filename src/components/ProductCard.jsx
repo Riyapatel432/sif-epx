@@ -406,7 +406,7 @@ export function ProductCard({ product, viewMode = 'grid', isFeatured = false, in
                 className="inline-flex items-center space-x-1.5 font-bold uppercase tracking-wider text-[#0B1F6B] group-hover:text-[#1E40D8] transition-colors"
               >
                 <span>VIEW DOSSIER</span>
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-3.5 w-3.5 card-arrow-shift" />
               </Link>
               <Link
                 to="/contact"

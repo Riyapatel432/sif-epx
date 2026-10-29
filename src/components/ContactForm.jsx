@@ -259,6 +259,31 @@ export function ContactForm() {
         {errors.message && <p className="mt-1 text-xs text-red-600 font-medium">{errors.message}</p>}
       </div>
 
+      {/* Optional Engineering Document / SLD Upload */}
+      <div>
+        <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#001B79] mb-1.5">
+          Attach Tender Document / Single Line Diagram (SLD) <span className="text-slate-400 font-normal lowercase">(optional)</span>
+        </label>
+        <div className="relative border-2 border-dashed border-sky-200 hover:border-[#0284C7] rounded-xl p-3 bg-sky-50/40 text-center transition-colors">
+          <input
+            type="file"
+            id="rfqFile"
+            name="rfqFile"
+            accept=".pdf,.dwg,.dxf,.zip,.doc,.docx"
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              setFormData((prev) => ({ ...prev, fileName: file ? file.name : '' }))
+            }}
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          />
+          <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
+            <span className="font-semibold text-[#001B79]">
+              {formData.fileName ? `✓ Selected: ${formData.fileName}` : 'Click or drag drawing / scope document (PDF, DWG, ZIP)'}
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-sky-100">
         <p className="text-[11px] font-mono text-slate-500 order-2 sm:order-1 text-center sm:text-left">
           🔒 ISO 9001:2015 audited &amp; NDA protected proposal handling.

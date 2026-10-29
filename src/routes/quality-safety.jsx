@@ -85,7 +85,7 @@ function QualitySafetyPage() {
   const visibleChecklist = showAllChecklist ? compliancePoints : compliancePoints.slice(0, 3)
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
 
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORAWAVES + BLURTEXT                                       */}
@@ -155,7 +155,7 @@ function QualitySafetyPage() {
       {/* ========================================================================= */}
       {/* 2. STANDARDS & CODES (Shared Section A: MobileSnapSlider with dots)       */}
       {/* ========================================================================= */}
-      <section id="standards-codes" className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80 scroll-mt-12">
+      <section id="standards-codes" className="reveal-fade-in py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80 scroll-mt-12">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <StandardsBadgeBar />
         </div>
@@ -164,8 +164,8 @@ function QualitySafetyPage() {
       {/* ========================================================================= */}
       {/* 3. INTERACTIVE RISK FORMULA CONSOLE (R = F × D)                           */}
       {/* ========================================================================= */}
-      <section id="risk-formula" className="py-10 sm:py-18 bg-white border-b border-sky-200/80 scroll-mt-12">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="risk-formula" className="reveal-fade-in py-10 sm:py-18 bg-white border-b border-sky-200/80 scroll-mt-12">
+        <div className="fade-up max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <RiskFormulaCard />
         </div>
       </section>

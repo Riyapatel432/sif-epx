@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import { ArrowRight, Phone, Award, CheckCircle2 } from 'lucide-react'
 import { companyInfo } from '../data/companyData'
 import LordIcon from './LordIcon'
@@ -14,7 +15,13 @@ export function CTASection({
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         
         {/* Banner with BGJar Stacked Wave & Polygon Luminary in cyan/royal gradient + circuit overlay */}
-        <div className="relative overflow-hidden rounded-[28px] bg-sif-cta p-6 sm:p-12 lg:p-14 text-white shadow-2xl border border-[#22B8F0]/30 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden rounded-[28px] bg-sif-cta p-6 sm:p-12 lg:p-14 text-white shadow-2xl border border-[#22B8F0]/30 text-left"
+        >
           
           {/* Subtle Aurora / Wave Beams Atmospheric Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#22B8F0]/20 rounded-full blur-3xl pointer-events-none" />
@@ -123,7 +130,7 @@ export function CTASection({
             </div>
 
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

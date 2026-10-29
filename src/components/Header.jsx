@@ -36,6 +36,7 @@ export function Header() {
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false)
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const dropdownTimeoutRef = useRef(null)
+  const productsTimeoutRef = useRef(null)
   const headerRef = useRef(null)
   const [headerHeight, setHeaderHeight] = useState(64)
 
@@ -185,8 +186,8 @@ export function Header() {
             <Logo className="h-12 sm:h-14 md:h-16 w-auto" />
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden items-center space-x-1 lg:flex xl:space-x-2">
+          {/* Desktop Navigation Links — Smooth padding & font scaling to prevent line-wrapping between 1024px and 1280px */}
+          <nav className="hidden items-center space-x-0.5 lg:flex xl:space-x-1 2xl:space-x-1.5">
             {navLinks.map((link, idx) => {
               const isActive =
                 link.path === '/'
@@ -203,7 +204,7 @@ export function Header() {
                   >
                     <Link
                       to="/services"
-                      className={`relative px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-bold tracking-wide transition-all inline-flex items-center space-x-1 rounded-lg ${
+                      className={`relative px-2 xl:px-2.5 2xl:px-3 py-2 text-[12px] xl:text-[13px] 2xl:text-sm font-bold tracking-tight transition-all inline-flex items-center space-x-1 rounded-lg ${
                         isActive
                           ? 'text-blue-900 font-black'
                           : 'text-slate-700 hover:text-blue-900 hover:bg-slate-50'
@@ -211,12 +212,12 @@ export function Header() {
                     >
                       <span>{link.name}</span>
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
+                        className={`h-3.5 w-3.5 transition-transform duration-200 ${
                           servicesDropdownOpen ? 'rotate-180 text-blue-900' : 'text-slate-400'
                         }`}
                       />
                       {isActive && (
-                        <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-blue-700" />
+                        <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-blue-700" />
                       )}
                     </Link>
 
@@ -325,7 +326,7 @@ export function Header() {
                   >
                     <Link
                       to="/products"
-                      className={`relative px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-bold tracking-wide transition-all inline-flex items-center space-x-1 rounded-lg ${
+                      className={`relative px-2 xl:px-2.5 2xl:px-3 py-2 text-[12px] xl:text-[13px] 2xl:text-sm font-bold tracking-tight transition-all inline-flex items-center space-x-1 rounded-lg ${
                         isActive
                           ? 'text-blue-900 font-black'
                           : 'text-slate-700 hover:text-blue-900 hover:bg-slate-50'
@@ -333,12 +334,12 @@ export function Header() {
                     >
                       <span>{link.name}</span>
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
+                        className={`h-3.5 w-3.5 transition-transform duration-200 ${
                           productsDropdownOpen ? 'rotate-180 text-blue-900' : 'text-slate-400'
                         }`}
                       />
                       {isActive && (
-                        <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-blue-700" />
+                        <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-blue-700" />
                       )}
                     </Link>
 
@@ -438,7 +439,7 @@ export function Header() {
                 <Link
                   key={idx}
                   to={link.path}
-                  className={`relative px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-bold tracking-wide transition-all inline-flex items-center space-x-1.5 ${
+                  className={`relative px-2 xl:px-2.5 2xl:px-3 py-2 text-[12px] xl:text-[13px] 2xl:text-sm font-bold tracking-tight transition-all inline-flex items-center space-x-1 ${
                     isActive
                       ? 'text-blue-900 font-black'
                       : 'text-slate-700 hover:text-blue-900 hover:bg-slate-50 rounded-lg'
@@ -446,16 +447,22 @@ export function Header() {
                 >
                   <span>{link.name}</span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-blue-700" />
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-blue-700" />
                   )}
                 </Link>
               )
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Direct RFQ */}
           <div className="flex lg:hidden items-center space-x-2">
-            
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#001B79] px-3 py-1.5 text-xs font-bold text-white shadow-xs"
+            >
+              <span>RFQ</span>
+              <ArrowRight className="h-3 w-3" />
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

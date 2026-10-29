@@ -4,8 +4,11 @@ import { MotionConfig } from 'motion/react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { MobileStickyBar } from '../components/ui/MobileStickyBar'
+import { ScrollProgress } from '../components/motion/ScrollProgress'
 import appCss from '../styles.css?url'
 import '../styles.css'
+
+import { initScrollObserver } from '../utils/scrollObserver'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -87,11 +90,11 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }) {
   return (
-    <html lang="en" className="h-full bg-[#F0F9FF]">
+    <html lang="en" className="h-full bg-white">
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] text-slate-900 antialiased selection:bg-[#0284C7] selection:text-white">
+      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 antialiased selection:bg-[#0284C7] selection:text-white">
         {children}
         <Scripts />
       </body>
@@ -106,15 +109,21 @@ function RootComponent() {
 
   // Ensure every route transition resets scroll to top (0, 0)
   useEffect(() => {
-    // If the URL has a hash, let the browser or hash handler handle it; otherwise scroll to top
-    if (!window.location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [pathname])
+
+  // Initialize universal scroll reveal observer
+  useEffect(() => {
+    const cleanup = initScrollObserver()
+    return () => {
+      if (cleanup) cleanup()
+    }
+  }, [])
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] text-slate-900">
+      <div className="flex min-h-screen flex-col bg-white text-slate-900 relative">
+        <ScrollProgress />
         <Header />
         <main className="flex-1 pb-mobile-nav">
           <Outlet />

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import { 
   Search, 
   LayoutGrid, 
@@ -100,12 +101,12 @@ function ProductsIndexPage() {
   const mobileProductsToShow = filteredProducts.slice(0, visibleProductCount)
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
 
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORAWAVES + BLURTEXT + CHIPSCROLLER                        */}
       {/* ========================================================================= */}
-      <section className="relative pt-10 pb-12 sm:pt-16 sm:pb-20 bg-sif-hero text-white overflow-hidden border-b border-[#22B8F0]/30">
+      <section id="products-hero" className="relative pt-10 pb-12 sm:pt-16 sm:pb-20 bg-sif-hero text-white overflow-hidden border-b border-[#22B8F0]/30">
         <AuroraWaves speed={0.007} />
 
         {/* Ambient Glows */}
@@ -169,7 +170,7 @@ function ProductsIndexPage() {
       {/* ========================================================================= */}
       {/* 2. STANDARDS CERTIFICATION RAIL (Shared Section A)                        */}
       {/* ========================================================================= */}
-      <section className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
+      <section id="standards-compliance" className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <StandardsBadgeBar />
         </div>
@@ -386,9 +387,16 @@ function ProductsIndexPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
                 {filteredProducts.map((product, idx) => (
-                  <div key={product.id} className="h-full">
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                    transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    className="h-full"
+                  >
                     <ProductCard product={product} viewMode="grid" index={idx} />
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}
@@ -400,7 +408,7 @@ function ProductsIndexPage() {
       {/* ========================================================================= */}
       {/* 5. TURNKEY MANUFACTURING ASSURANCE STRIP (MobileSnapSlider on mobile)     */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-18 bg-white border-t border-sky-200/80">
+      <section className="reveal-fade-in py-10 sm:py-18 bg-white border-t border-sky-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <MobileSnapSlider
             desktopClassName="lg:grid lg:grid-cols-3 lg:gap-6"
@@ -410,7 +418,8 @@ function ProductsIndexPage() {
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.22)"
               size={300}
-              className="rounded-[20px] border border-sky-200/90 bg-white p-5 sm:p-7 shadow-xs hover:border-[#1E40D8] transition-all space-y-3 h-full text-left"
+              className="fade-up rounded-[20px] border border-sky-200/90 bg-white p-5 sm:p-7 shadow-xs hover:border-[#1E40D8] transition-all space-y-3 h-full text-left"
+              data-delay="100"
             >
               <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0B1F6B] font-black font-mono text-sm">
                 01

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import {
   MapPin,
   Phone,
@@ -69,7 +70,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="relative border-t border-[#22B8F0]/30 bg-[#0B1F6B] text-white font-sans overflow-hidden">
+    <footer className="reveal-fade-in relative border-t border-[#22B8F0]/30 bg-[#0B1F6B] text-white font-sans overflow-hidden">
       
       {/* Background Engineering Blueprint Grid & Soft Atmospheric Glows */}
       <div className="absolute inset-0 bg-dark-grid opacity-15 pointer-events-none" />
@@ -151,7 +152,13 @@ export function Footer() {
       </div>
 
       {/* 2. Main Multi-Column Footer Grid */}
-      <div className="relative z-10 mx-auto max-w-[1440px] px-4 pt-10 pb-6 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 mx-auto max-w-[1440px] px-4 pt-10 pb-6 sm:px-6 lg:px-8"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-6 items-start">
           
           {/* Column 1 (4 cols): Brand Identity & Credentials */}
@@ -433,7 +440,7 @@ export function Footer() {
           </div>
 
         </div>
-      </div>
+      </motion.div>
 
       {/* 3. Bottom Sub-Footer Bar */}
       <div className="relative z-10 border-t border-white/15 bg-[#071648] px-4 py-3 text-xs text-sky-100 font-mono shadow-xs">

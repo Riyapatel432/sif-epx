@@ -124,7 +124,7 @@ export function ServiceCard({ service }) {
             className="inline-flex items-center space-x-1.5 min-h-[44px] py-1"
           >
             <span>EXPLORE FULL SCOPE</span>
-            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-3.5 w-3.5 card-arrow-shift" />
           </Link>
           <span className="text-[10px] uppercase text-[#12B76A] flex items-center gap-1 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-[#12B76A] animate-pulse" />

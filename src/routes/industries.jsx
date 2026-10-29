@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import {
   FlaskConical,
   Pill,
@@ -177,7 +178,7 @@ function IndustriesPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
       
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORA WAVES + BLURTEXT                                      */}
@@ -243,7 +244,7 @@ function IndustriesPage() {
       {/* ========================================================================= */}
       {/* 2. STANDARDS AS CERTIFICATION RAIL                                        */}
       {/* ========================================================================= */}
-      <section className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
+      <section className="reveal-fade-in py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <StandardsBadgeBar />
         </div>
@@ -414,16 +415,24 @@ function IndustriesPage() {
           <div className="hidden lg:block space-y-8">
             {/* ROW 1: SECTORS 01 & 02 */}
             <div className="grid grid-cols-2 gap-8 items-stretch">
-              {sectorsConfig.slice(0, 2).map((ind) => {
+              {sectorsConfig.slice(0, 2).map((ind, idx) => {
                 const Fallback = ind.FallbackIcon
                 return (
-                  <TiltedCard key={ind.id} maxTilt={4} perspective={900} className="h-full">
-                    <SpotlightCard
-                      spotlightColor="rgba(34, 184, 240, 0.22)"
-                      size={380}
-                      id={ind.id}
-                      className="scroll-mt-20 group relative overflow-hidden rounded-[20px] border border-sky-200/90 bg-white p-7 sm:p-9 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between sector-card-corner h-full text-left"
-                    >
+                  <motion.div
+                    key={ind.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                    transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    className="h-full"
+                  >
+                    <TiltedCard maxTilt={4} perspective={900} className="h-full">
+                      <SpotlightCard
+                        spotlightColor="rgba(34, 184, 240, 0.22)"
+                        size={380}
+                        id={ind.id}
+                        className="scroll-mt-20 group relative overflow-hidden rounded-[20px] border border-sky-200/90 bg-white p-7 sm:p-9 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between sector-card-corner h-full text-left"
+                      >
                       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0B1F6B] via-[#1E40D8] to-[#22B8F0] opacity-80 group-hover:h-2 transition-all duration-300" />
                       
                       {/* Watermark numbers: kept small and positioned out of text flow */}
@@ -486,6 +495,7 @@ function IndustriesPage() {
                       </div>
                     </SpotlightCard>
                   </TiltedCard>
+                </motion.div>
                 )
               })}
             </div>

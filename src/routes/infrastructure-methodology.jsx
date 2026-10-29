@@ -228,7 +228,7 @@ function InfrastructureMethodologyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
       
       {/* ========================================================================= */}
       {/* 1. HERO — AURORAWAVES + BLURTEXT + FLOATING TELEMETRY METRIC CONSOLE     */}
@@ -307,7 +307,8 @@ function InfrastructureMethodologyPage() {
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.22)"
               size={200}
-              className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              className="fade-up rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              data-delay="100"
             >
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-sky-400/20 border border-sky-300/30 flex items-center justify-center shrink-0 text-sky-300">
                 <Factory className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -321,7 +322,8 @@ function InfrastructureMethodologyPage() {
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.22)"
               size={200}
-              className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              className="fade-up rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              data-delay="200"
             >
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-sky-400/20 border border-sky-300/30 flex items-center justify-center shrink-0 text-sky-300">
                 <Compass className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -335,7 +337,8 @@ function InfrastructureMethodologyPage() {
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.22)"
               size={200}
-              className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              className="fade-up rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              data-delay="300"
             >
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-sky-400/20 border border-sky-300/30 flex items-center justify-center shrink-0 text-sky-300">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -349,7 +352,8 @@ function InfrastructureMethodologyPage() {
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.22)"
               size={200}
-              className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              className="fade-up rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5"
+              data-delay="400"
             >
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-400/20 border border-emerald-300/30 flex items-center justify-center shrink-0 text-emerald-300">
                 <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -367,7 +371,7 @@ function InfrastructureMethodologyPage() {
       {/* ========================================================================= */}
       {/* 2. WORKS CAPABILITIES — SPEC-SHEET TILES WITH CORNER TICKS & MONO GAUGES */}
       {/* ========================================================================= */}
-      <section id="works-spec" className="py-12 sm:py-20 relative section-sky-a overflow-hidden scroll-mt-28">
+      <section id="works-spec" className="reveal-fade-in py-12 sm:py-20 relative section-sky-a overflow-hidden scroll-mt-28">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-3">
@@ -567,8 +571,12 @@ function InfrastructureMethodologyPage() {
                 const isHiddenOnMobile = !showAllTools && idx >= 4
 
                 return (
-                  <div
+                  <motion.div
                     key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-30px' }}
+                    transition={{ duration: 0.4, delay: (idx % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
                     className={`${
                       isHiddenOnMobile ? 'hidden lg:flex' : 'flex'
                     } group relative rounded-2xl bg-gradient-to-br from-white via-sky-50/40 to-white border border-sky-200 p-3 sm:p-5 shadow-sm hover:border-[#0284C7] hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 flex-col justify-between`}
@@ -603,7 +611,7 @@ function InfrastructureMethodologyPage() {
                         <span>STANDARDIZED</span>
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
                 )
               })}
             </div>

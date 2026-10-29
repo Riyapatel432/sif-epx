@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import {
   ShieldCheck,
   Sliders,
@@ -636,8 +637,12 @@ function ProductDetailPage() {
                 {/* 2x2 Grid of Deliverable Tiles */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {product.deliverables.map((del, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                      transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                       className="group flex items-start space-x-3.5 p-4 rounded-xl border border-sky-100 bg-gradient-to-br from-white to-sky-50/50 hover:border-sky-300 hover:shadow-md transition-all"
                     >
                       <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
@@ -651,7 +656,7 @@ function ProductDetailPage() {
                           {del}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </section>

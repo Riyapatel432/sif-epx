@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { motion, AnimatePresence } from 'motion/react'
 import {
   ChevronDown,
   ChevronUp,
@@ -117,7 +118,7 @@ function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
 
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORAWAVES + BLURTEXT                                       */}
@@ -212,19 +213,34 @@ function ContactPage() {
 
               if (stat.href) {
                 return (
-                  <a
+                  <motion.a
                     key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                    transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                     href={stat.href}
-                    className="block hover:scale-[1.01] transition-transform"
+                    className="block hover:scale-[1.01] transition-transform h-full"
                     target={stat.href.startsWith('http') ? '_blank' : undefined}
                     rel={stat.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
                     {CardInner}
-                  </a>
+                  </motion.a>
                 )
               }
 
-              return <div key={idx}>{CardInner}</div>
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                  transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-full"
+                >
+                  {CardInner}
+                </motion.div>
+              )
             })}
           </div>
         </div>
@@ -233,7 +249,7 @@ function ContactPage() {
       {/* ========================================================================= */}
       {/* 3. REGIONAL DESKS & WORKS INTERACTIVE LOCATOR                             */}
       {/* ========================================================================= */}
-      <section id="regional-desks" className="py-10 sm:py-18 bg-white border-b border-sky-200/80 scroll-mt-12">
+      <section id="regional-desks" className="reveal-fade-in py-10 sm:py-18 bg-white border-b border-sky-200/80 scroll-mt-12">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <AnimatedContent distance={20} duration={0.6}>
@@ -271,7 +287,13 @@ function ContactPage() {
             </div>
           </AnimatedContent>
 
-          <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-4xl mx-auto"
+          >
             <SpotlightCard
               spotlightColor="rgba(34, 184, 240, 0.15)"
               size={450}
@@ -280,7 +302,7 @@ function ContactPage() {
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0B1F6B] via-[#1E40D8] to-[#22B8F0]" />
               <ContactForm />
             </SpotlightCard>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -319,20 +341,30 @@ function ContactPage() {
                     <span className="font-bold text-xs sm:text-sm text-[#0B1F6B] leading-snug">
                       {faq.q}
                     </span>
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-[#0B1F6B] text-white' : 'bg-sky-100 text-[#0B1F6B]'}`}>
-                      {isOpen ? (
-                        <ChevronUp className="w-5 h-5" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5" />
-                      )}
-                    </div>
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-[#0B1F6B] text-white' : 'bg-sky-100 text-[#0B1F6B]'}`}
+                    >
+                      <ChevronDown className="w-5 h-5" />
+                    </motion.div>
                   </button>
 
-                  {isOpen && (
-                    <div className="p-4 sm:p-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-sky-100 bg-sky-50/40">
-                      <p className="pt-3">{faq.a}</p>
-                    </div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 sm:p-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-sky-100 bg-sky-50/40">
+                          <p className="pt-3">{faq.a}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               )
             })}

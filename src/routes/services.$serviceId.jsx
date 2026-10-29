@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import { CheckCircle2, ArrowRight, Award, FileText, ChevronRight, Zap, ShieldCheck, Sparkles, Activity, Layers, Target, Compass } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import StickySectionNav from '../components/StickySectionNav'
@@ -94,22 +95,22 @@ function ServiceDetailPage() {
       />
 
       {/* 2. Quick Engineering Metrics Banner */}
-      <section className="bg-white border-b border-sky-200/80 shadow-xs relative z-10">
+      <section className="reveal-fade-in bg-white border-b border-sky-200/80 shadow-xs relative z-10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-sky-100 text-center">
-            <div className="p-2 space-y-1">
+            <div className="fade-up p-2 space-y-1" data-delay="100">
               <span className="font-mono text-[10px] uppercase font-bold text-slate-500 tracking-wider">Governing Quality</span>
               <p className="font-mono text-sm sm:text-base font-black text-[#001B79]">ISO 9001:2015 QA</p>
             </div>
-            <div className="p-2 space-y-1">
+            <div className="fade-up p-2 space-y-1" data-delay="200">
               <span className="font-mono text-[10px] uppercase font-bold text-slate-600 tracking-wider">Multi-Tier Inspection</span>
               <p className="font-mono text-sm sm:text-base font-black text-[#0369A1]">100% FAT / SAT Verified</p>
             </div>
-            <div className="p-2 space-y-1">
+            <div className="fade-up p-2 space-y-1" data-delay="300">
               <span className="font-mono text-[10px] uppercase font-bold text-slate-600 tracking-wider">Compliance Codes</span>
               <p className="font-mono text-sm sm:text-base font-black text-[#001B79]">IS / IEC / ASME / CEIG</p>
             </div>
-            <div className="p-2 space-y-1">
+            <div className="fade-up p-2 space-y-1" data-delay="400">
               <span className="font-mono text-[10px] uppercase font-bold text-slate-600 tracking-wider">Execution Hub</span>
               <p className="font-mono text-sm sm:text-base font-black text-[#047857]">Murad Nagar Works &amp; Sites</p>
             </div>
@@ -127,7 +128,7 @@ function ServiceDetailPage() {
             
             {/* Left Column: Scope & Overview */}
             <div className="lg:col-span-8 space-y-10">
-              <SpotlightCard className="p-8 sm:p-10 rounded-3xl border border-sky-200/90 bg-white/90 shadow-md space-y-6">
+              <SpotlightCard className="fade-up p-8 sm:p-10 rounded-3xl border border-sky-200/90 bg-white/90 shadow-md space-y-6">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="eyebrow-pill">DISCIPLINE OVERVIEW</span>
                   <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-sky-100 text-[#001B79]">
@@ -309,17 +310,26 @@ function ServiceDetailPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {service.benefits.map((b, idx) => (
-              <SpotlightCard key={idx} className="p-6 rounded-2xl border border-sky-200 bg-white/95 shadow-xs flex flex-col justify-between hover:border-sky-400 transition-all">
-                <div>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-[#001B79] font-mono font-bold text-xs mb-3">
-                    0{idx + 1}
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">{b}</p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-sky-100 text-[10px] font-mono text-[#0369A1] font-bold">
-                  TESTED PROTOCOL
-                </div>
-              </SpotlightCard>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full"
+              >
+                <SpotlightCard className="p-6 rounded-2xl border border-sky-200 bg-white/95 shadow-xs flex flex-col justify-between hover:border-sky-400 transition-all h-full">
+                  <div>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-100 text-[#001B79] font-mono font-bold text-xs mb-3">
+                      0{idx + 1}
+                    </span>
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">{b}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-sky-100 text-[10px] font-mono text-[#0369A1] font-bold">
+                    TESTED PROTOCOL
+                  </div>
+                </SpotlightCard>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -329,27 +339,36 @@ function ServiceDetailPage() {
       <section id="related" className="py-16 bg-[#F0F9FF]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between mb-8 pb-4 border-b border-sky-200">
-            <div>
+            <div className="fade-up">
               <span className="eyebrow-pill">COMPLEMENTARY PACKAGES</span>
               <h3 className="text-2xl font-black text-[#001B79]">Related Switchgear &amp; Products</h3>
             </div>
-            <Link to="/products" className="btn-pill-secondary text-xs">
+            <Link to="/products" className="fade-up btn-pill-secondary text-xs" data-delay="100">
               View All Products &gt;
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProducts.map((p) => (
-              <SpotlightCard key={p.id} className="p-6 rounded-2xl border border-sky-200 bg-white shadow-sm flex flex-col justify-between hover:border-sky-400 transition-all">
-                <div>
-                  <span className="text-[10px] font-mono font-bold text-[#0369A1] uppercase">{p.category}</span>
-                  <h4 className="text-base font-black text-[#001B79] mt-1 mb-2">{p.title}</h4>
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">{p.summary}</p>
-                </div>
-                <Link to="/products/$productId" params={{ productId: p.slug }} className="mt-4 inline-flex items-center space-x-1 text-xs font-bold text-[#001B79] hover:text-[#0284C7]">
-                  <span>Explore Technical Specs</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </Link>
-              </SpotlightCard>
+            {relatedProducts.map((p, idx) => (
+              <motion.div
+                key={p.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full"
+              >
+                <SpotlightCard className="p-6 rounded-2xl border border-sky-200 bg-white shadow-sm flex flex-col justify-between hover:border-sky-400 transition-all h-full">
+                  <div>
+                    <span className="text-[10px] font-mono font-bold text-[#0369A1] uppercase">{p.category}</span>
+                    <h4 className="text-base font-black text-[#001B79] mt-1 mb-2">{p.title}</h4>
+                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">{p.summary}</p>
+                  </div>
+                  <Link to="/products/$productId" params={{ productId: p.slug }} className="mt-4 inline-flex items-center space-x-1 text-xs font-bold text-[#001B79] hover:text-[#0284C7]">
+                    <span>Explore Technical Specs</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </SpotlightCard>
+              </motion.div>
             ))}
           </div>
         </div>

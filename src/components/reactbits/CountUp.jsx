@@ -14,7 +14,7 @@ export default function CountUp({
   suffix = '',
   prefix = '',
 }) {
-  const [count, setCount] = useState(from)
+  const [count, setCount] = useState(to)
   const [hasAnimated, setHasAnimated] = useState(false)
   const elementRef = useRef(null)
 
@@ -48,7 +48,7 @@ export default function CountUp({
           window.requestAnimationFrame(step)
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     )
 
     if (elementRef.current) {

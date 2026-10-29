@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { motion } from 'motion/react'
 import {
   Building2,
   Briefcase,
@@ -158,7 +159,7 @@ function ClientsPage() {
   const rowTwo = clientsWithLogos.slice(half)
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
 
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORA WAVES + BLURTEXT                                      */}
@@ -226,19 +227,21 @@ function ClientsPage() {
       {/* ========================================================================= */}
       {/* 2. STATS SECTION (2-column x 3-row grid on mobile, 6-col on desktop)      */}
       {/* ========================================================================= */}
-      <section className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
+      <section className="reveal-fade-in py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
             {companyInfo.keyStats.map((stat, idx) => {
               const numericVal = parseInt(stat.value, 10)
               const isPureNum = !isNaN(numericVal) && !stat.value.includes('-')
+              const staggerDelay = (idx % 5) * 100
 
               return (
                 <SpotlightCard
                   key={idx}
                   spotlightColor="rgba(34, 184, 240, 0.22)"
                   size={180}
-                  className="rounded-2xl border border-sky-200/90 bg-white p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-[#1E40D8] hover:shadow-md flex flex-col items-center justify-center text-center"
+                  className="fade-up rounded-2xl border border-sky-200/90 bg-white p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-[#1E40D8] hover:shadow-md flex flex-col items-center justify-center text-center"
+                  data-delay={`${staggerDelay}`}
                 >
                   <div className="text-xl sm:text-3xl font-black text-[#0B1F6B] font-mono flex items-baseline justify-center">
                     {isPureNum ? (
@@ -291,7 +294,7 @@ function ClientsPage() {
                     <img
                       src={client.logo}
                       alt={client.name}
-                      className="h-5 sm:h-6 w-auto max-w-[70px] sm:max-w-[80px] object-contain mix-blend-multiply"
+                      className="h-5 sm:h-6 w-auto max-w-[70px] sm:max-w-[80px] object-contain mix-blend-multiply grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                     />
                   ) : (
                     <span className="font-mono text-xs font-black text-[#0B1F6B]">
@@ -323,7 +326,7 @@ function ClientsPage() {
                     <img
                       src={client.logo}
                       alt={client.name}
-                      className="h-5 sm:h-6 w-auto max-w-[70px] sm:max-w-[80px] object-contain mix-blend-multiply"
+                      className="h-5 sm:h-6 w-auto max-w-[70px] sm:max-w-[80px] object-contain mix-blend-multiply grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                     />
                   ) : (
                     <span className="font-mono text-xs font-black text-[#0B1F6B]">
@@ -487,7 +490,14 @@ function ClientsPage() {
               )
 
               return (
-                <div key={client.id || client.name} className={bentoClass}>
+                <motion.div
+                  key={client.id || client.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                  transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className={bentoClass}
+                >
                   <TiltedCard maxTilt={4} perspective={900} className="h-full">
                     <SpotlightCard
                       spotlightColor="rgba(34, 184, 240, 0.2)"
@@ -581,7 +591,7 @@ function ClientsPage() {
                       </div>
                     </SpotlightCard>
                   </TiltedCard>
-                </div>
+                </motion.div>
               )
             })}
           </div>

@@ -52,36 +52,46 @@
     --silver-metallic: #94a3b8;
     --silver-light: #cbd5e1;
 
-    /* MASTER DESIGN SYSTEM TOKENS */
-    --ink-900: #1B2336;      /* top utility bar, deep text */
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+
+    /* MASTER DESIGN SYSTEM TOKENS - REFINED FOR CORPORATE CALM & WCAG AA */
+    --ink-900: #0F172A;      /* Slate-900: high-contrast text */
     --navy-900: #031A5D;     /* hero gradient start */
     --navy-700: #023E92;     /* hero gradient mid */
     --blue-600: #004999;     /* hero gradient end, links */
-    --royal-600: #1E3AAE;    /* primary buttons (GET A QUOTE) */
-    --steel-500: #28599B;    /* newsletter band and footer base */
-    --cyan-400: #22B8F0;     /* accent, icons, highlights */
-    --ice-100: #E0F2FE;      /* section backgrounds */
-    --ice-50: #F3FAFE;       /* page background */
-    --ok-500: #12B76A;       /* status dots and check icons only */
+    --royal-600: #1E3AAE;    /* primary buttons (GET A QUOTE / RFQ) */
+    --steel-500: #1E293B;    /* newsletter band and footer base */
+    --cyan-400: #0284C7;     /* darkened cyan for 4.5:1 WCAG AA compliance */
+    --ice-100: #F8FAFC;      /* section alternating backgrounds (Clean Slate-50) */
+    --ice-50: #FFFFFF;       /* crisp white primary page background */
+    --ok-500: #059669;       /* accessible emerald checkmark */
     --white: #FFFFFF;
 
     /* SIF-EPX Brand Palette Compatibility */
     --brand-navy: #031A5D;
     --brand-royal: #1E3AAE;
-    --brand-cyan: #22B8F0;
-    --brand-ice: #F3FAFE;
+    --brand-cyan: #0284C7;
+    --brand-ice: #FFFFFF;
     --radius-sm: 12px;
     --radius-md: 20px;
     --radius-lg: 28px;
-    --shadow-soft: 0 10px 30px -10px rgba(3, 26, 93, 0.08);
-    --shadow-soft-lg: 0 20px 40px -15px rgba(3, 26, 93, 0.16);
+    --shadow-soft: 0 4px 20px -2px rgba(3, 26, 93, 0.05);
+    --shadow-soft-lg: 0 12px 30px -4px rgba(3, 26, 93, 0.12);
+
+    /* Universal Scroll Reveal Animation Tokens */
+    --reveal-duration: 700ms;
+    --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+    --reveal-distance: 30px;
+    --reveal-distance-mobile: 20px;
+    --reveal-stagger: 100ms;
   }
 
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
     color: var(--ink-900);
-    background-color: var(--ice-50);
+    background-color: var(--white);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -93,6 +103,7 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    background-color: var(--white);
   }
 
   #app {
@@ -284,8 +295,8 @@
 /* ========================================================================= */
 
 .section-sky-a {
-  background: linear-gradient(to bottom, #F0F9FF, #ffffff, #E0F2FE);
-  border-bottom: 1px solid #bae6fd;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
 }
@@ -298,8 +309,8 @@
 }
 
 .section-sky-b {
-  background: linear-gradient(to bottom, rgba(224, 242, 254, 0.6), #ffffff, #F0F9FF);
-  border-bottom: 1px solid #bae6fd;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
 }
@@ -317,28 +328,46 @@
   gap: 0.5rem;
   padding: 0.25rem 0.875rem;
   border-radius: 9999px;
-  background-color: #e0f2fe;
-  border: 1px solid #7dd3fc;
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #001B79;
+  color: #1E3AAE;
 }
 
 .card-sky {
   background-color: #ffffff;
   border-radius: 1rem;
-  border: 1px solid #bae6fd;
-  box-shadow: 0 4px 6px -1px rgba(224, 242, 254, 0.6), 0 2px 4px -2px rgba(224, 242, 254, 0.6);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px -2px rgba(3, 26, 93, 0.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
 }
 
 .card-sky:hover {
-  border-color: #0284C7;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 15px -3px rgba(186, 230, 253, 0.6);
+  border-color: #93C5FD;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -6px rgba(3, 26, 93, 0.12), 0 8px 16px -4px rgba(2, 132, 199, 0.08);
+}
+
+/* Premium B2B Card & Button Motion Dynamics (Surpassing Rexel India) */
+.group:hover .card-arrow-shift {
+  transform: translateX(4px);
+}
+
+.card-arrow-shift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .img-cinematic-zoom {
+  transform: scale(1.06);
+}
+
+.img-cinematic-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
 }
 
 .btn-pill-primary {
@@ -347,21 +376,24 @@
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  background: linear-gradient(to right, #001B79, #00229C, #0284C7);
+  background: linear-gradient(135deg, #031A5D 0%, #1E3AAE 50%, #0284C7 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
   color: #ffffff;
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.875rem 1.75rem;
-  box-shadow: 0 10px 15px -3px rgba(186, 230, 253, 0.8);
-  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px -4px rgba(30, 58, 174, 0.45);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 44px;
 }
 
 .btn-pill-primary:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -4px rgba(30, 58, 174, 0.55), 0 0 15px rgba(2, 132, 199, 0.35);
 }
 
 .btn-pill-secondary {
@@ -1039,5 +1071,191 @@ html, body {
 @media (min-width: 1024px) {
   .pb-mobile-nav {
     padding-bottom: 0;
+  }
+}
+
+/* ========================================================================= */
+/* UNIVERSAL SCROLL-TRIGGERED REVEAL ANIMATIONS                              */
+/* ========================================================================= */
+
+/* Progressive enhancement: Elements start visible if JS fails,
+   and are only hidden when HTML has the 'js-animations' class.
+   Scoped to .reveal-fade-* and .fade-up/.fade-scale so it doesn't conflict
+   with Tailwind's standard .animate-in .fade-in utility. */
+html.js-animations .fade-up,
+html.js-animations .reveal-fade-up,
+html.js-animations .reveal-fade-in,
+html.js-animations .fade-scale,
+html.js-animations .reveal-fade-scale {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+html.js-animations .fade-up,
+html.js-animations .reveal-fade-up {
+  transform: translateY(var(--reveal-distance));
+}
+
+@media (max-width: 768px) {
+  html.js-animations .fade-up,
+  html.js-animations .reveal-fade-up {
+    transform: translateY(var(--reveal-distance-mobile));
+  }
+}
+
+html.js-animations .fade-scale,
+html.js-animations .reveal-fade-scale {
+  transform: scale(0.97);
+}
+
+/* Active animated states applied when IntersectionObserver triggers 'is-revealed' */
+html.js-animations .fade-up.is-revealed,
+html.js-animations .reveal-fade-up.is-revealed,
+html.js-animations .reveal-fade-in.is-revealed,
+html.js-animations .fade-scale.is-revealed,
+html.js-animations .reveal-fade-scale.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition-property: opacity, transform;
+  transition-duration: var(--reveal-duration);
+  transition-timing-function: var(--reveal-easing);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Stagger utilities via data-delay or class */
+[data-delay="100"] {
+  --reveal-delay: 100ms;
+}
+
+[data-delay="200"] {
+  --reveal-delay: 200ms;
+}
+
+[data-delay="300"] {
+  --reveal-delay: 300ms;
+}
+
+[data-delay="400"] {
+  --reveal-delay: 400ms;
+}
+
+[data-delay="500"] {
+  --reveal-delay: 500ms;
+}
+
+/* Accessibility: prefers-reduced-motion disables movement and maintains simple fade */
+@media (prefers-reduced-motion: reduce) {
+  html.js-animations .fade-up,
+  html.js-animations .reveal-fade-up,
+  html.js-animations .reveal-fade-in,
+  html.js-animations .fade-scale,
+  html.js-animations .reveal-fade-scale {
+    transform: none !important;
+    opacity: 0 !important;
+  }
+
+  html.js-animations .fade-up.is-revealed,
+  html.js-animations .reveal-fade-up.is-revealed,
+  html.js-animations .reveal-fade-in.is-revealed,
+  html.js-animations .fade-scale.is-revealed,
+  html.js-animations .reveal-fade-scale.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-duration: 300ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ========================================================================= */
+/* STEP 3 — MICRO-INTERACTIONS (Buttons, Cards, Links, Icons)                */
+/* ========================================================================= */
+
+/* Buttons: hover lift (y -2px) + soft shadow, tap scale 0.97, 200ms */
+.btn-pill-primary,
+.btn-pill-secondary,
+.btn-pill-outline,
+button[type="submit"] {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease !important;
+}
+
+.btn-pill-primary:hover,
+.btn-pill-secondary:hover,
+.btn-pill-outline:hover,
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(3, 26, 93, 0.22);
+}
+
+.btn-pill-primary:active,
+.btn-pill-secondary:active,
+.btn-pill-outline:active,
+button[type="submit"]:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* Cards: hover lift y -6px, border/glow colour transition, image inside zooms 1.05 */
+.interactive-card,
+.card-sky {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease, border-color 300ms ease !important;
+}
+
+.interactive-card:hover,
+.card-sky:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px -6px rgba(3, 26, 93, 0.16);
+}
+
+.interactive-card img,
+.card-sky img {
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.interactive-card:hover img,
+.card-sky:hover img {
+  transform: scale(1.05);
+}
+
+/* Links: animated underline growing from the left */
+.motion-link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.motion-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Icons: small rotate or bounce on card hover */
+.interactive-card:hover svg.lucide,
+.card-sky:hover svg.lucide {
+  transform: scale(1.1) rotate(4deg);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-pill-primary:hover,
+  .btn-pill-secondary:hover,
+  .btn-pill-outline:hover,
+  button[type="submit"]:hover,
+  .interactive-card:hover,
+  .card-sky:hover,
+  .interactive-card:hover img,
+  .card-sky:hover img,
+  .interactive-card:hover svg.lucide,
+  .card-sky:hover svg.lucide {
+    transform: none !important;
   }
 }

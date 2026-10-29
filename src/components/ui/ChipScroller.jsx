@@ -20,13 +20,17 @@ export function ChipScroller({
 
   useEffect(() => {
     if (!containerRef.current || !activeId) return
-    const activeEl = containerRef.current.querySelector(`[data-chip-id="${activeId}"]`)
+    const container = containerRef.current
+    const activeEl = container.querySelector(`[data-chip-id="${activeId}"]`)
     if (activeEl) {
-      activeEl.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      })
+      // Calculate target horizontal scroll relative to the container only
+      const containerRect = container.getBoundingClientRect()
+      const chipRect = activeEl.getBoundingClientRect()
+      const targetScrollLeft =
+        container.scrollLeft +
+        (chipRect.left - containerRect.left) -
+        (container.clientWidth / 2 - activeEl.clientWidth / 2)
+      container.scrollTo({ left: Math.max(0, targetScrollLeft), behavior: 'smooth' })
     }
   }, [activeId])
 

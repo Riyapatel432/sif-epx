@@ -1111,6 +1111,63 @@ function SifBespokeHomeThree() {
   const [configStep, setConfigStep] = useState(0)
   const [showFullWhatWeDo, setShowFullWhatWeDo] = useState(false)
 
+  // Hero Carousel Slider State & Autoplay (Rexel-inspired but original SIF engineering content)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const heroSlides = [
+    {
+      id: 0,
+      eyebrow: 'TURNKEY EPCM & AUTOMATION',
+      line1: 'ENGINEERED TO',
+      line2: 'TRANSFORM. WE EMPOWER',
+      line3: 'CONTINUOUS INDUSTRY.',
+      description:
+        'SIF Systems (SIF-EPX Group) delivers turnkey chemical process equipment, type-tested IEC 61439 switchboards, SCADA automation, and industrial air emissions scrubbers designed to maximize productivity and regulatory compliance across India.',
+      primaryBtnText: 'Request Technical Proposal',
+      primaryBtnLink: '/contact',
+      secondaryBtnText: 'Explore EPCM Lifecycle',
+      secondaryBtnAction: 'epcm-pipeline',
+      bgImage: '/images/hero-plant.jpg',
+      badge: 'ISO 9001:2015 CERTIFIED',
+    },
+    {
+      id: 1,
+      eyebrow: 'MANUFACTURING WORKS // MURAD NAGAR',
+      line1: 'CUSTOM SWITCHBOARDS &',
+      line2: 'INTELLIGENT MCC PANELS.',
+      line3: 'CPRI TESTED UP TO 50kA.',
+      description:
+        'Form 4b type-tested low-voltage power control centers, 11kV/33kV VCB panels, 9-tank chemical pre-treatment, and full routine factory testing at our dedicated 25,000 sq ft manufacturing works.',
+      primaryBtnText: 'Explore Switchgear Portfolio',
+      primaryBtnLink: '/products',
+      secondaryBtnText: 'Factory Tour & Works Spec',
+      secondaryBtnAction: 'what-we-do',
+      bgImage: '/images/control-room.jpg',
+      badge: 'IEC 61439 COMPLIANT',
+    },
+    {
+      id: 2,
+      eyebrow: 'PROCESS SCADA & DCS ARCHITECTURE',
+      line1: 'ADVANCED BATCH AUTOMATION',
+      line2: 'ISA S-88 COMPLIANCE.',
+      line3: 'ZERO-DOWNTIME CONTROL.',
+      description:
+        'End-to-end Rockwell, Siemens, Schneider & ABB PLC architectures, distributed I/O telemetry, Wonderware/Ignition SCADA, and hazardous area flameproof instrumentation for major chemical plants.',
+      primaryBtnText: 'View Automation Capabilities',
+      primaryBtnLink: '/services',
+      secondaryBtnText: 'Interactive P&ID Simulator',
+      secondaryBtnAction: 'pid-simulator',
+      bgImage: '/images/process-piping.jpg',
+      badge: 'SIL-3 CERTIFIED',
+    },
+  ]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [heroSlides.length])
+
   // Form State
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formData, setFormData] = useState({
@@ -1423,7 +1480,7 @@ function SifBespokeHomeThree() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
       
       {/* ========================================================================= */}
       {/* 1. HERO — CINEMATIC FULLSCREEN HERO (WHITE & LIGHT BLUE GRADIENTS) */}
@@ -1435,106 +1492,124 @@ function SifBespokeHomeThree() {
           <TechnicalBlueprintGridSVG />
         </div>
 
-        {/* Cinematic Video Background with Poster Fallback */}
-        <div className="absolute inset-0 z-0 origin-center">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/images/hero-plant.jpg"
-            className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15]"
-          >
-            <source src="https://cdn.coverr.co/videos/coverr-robotic-arm-in-factory-4415/1080p.mp4" type="video/mp4" />
-            <img src="/images/hero-plant.jpg" alt="Industrial Manufacturing" className="w-full h-full object-cover" loading="lazy" />
-          </video>
-          
-          {/* Luminous White & Light Blue / Navy Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#001B79] via-[#001B79]/60 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001B79]/90 via-[#0284C7]/40 to-transparent pointer-events-none" />
-        </div>
+        {/* Full-width Carousel Backgrounds with Cross-fade Transition */}
+        {heroSlides.map((slide, sIdx) => {
+          const isActive = currentSlide === sIdx
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 z-0 origin-center transition-opacity duration-1000 ease-in-out ${
+                isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              <img
+                src={slide.bgImage}
+                alt={slide.eyebrow}
+                className="w-full h-full object-cover filter brightness-[0.4] contrast-[1.15] scale-105 transition-transform duration-10000 ease-out"
+                loading="eager"
+              />
+              {/* Luminous Gradient Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#001B79] via-[#001B79]/65 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#001B79]/95 via-[#0284C7]/35 to-transparent pointer-events-none" />
+            </div>
+          )
+        })}
 
         {/* Hero Content Container */}
         <div className="relative z-10 w-full px-4 sm:px-6 pb-4 sm:pb-14 md:pb-20 lg:px-16 pt-4 sm:pt-10 lg:pt-[18vh] flex flex-col justify-end">
           <div className="max-w-[1440px] mx-auto w-full flex-1 flex flex-col justify-end">
             
-            {/* Monospace Eyebrow with Pulse Dot — 1 Line on Mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-4 sm:mb-6 md:mb-8"
-            >
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/15 border border-sky-300/40 backdrop-blur-md max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse shrink-0" />
-                <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] uppercase text-sky-200 font-bold truncate">
-                 Turnkey EPCM &amp; Automation
-                </span>
-              </div>
-            </motion.div>
+            {/* Animated Slide Content (Keyed by currentSlide for clean transition) */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-4 sm:space-y-6"
+              >
+                {/* Monospace Eyebrow with Pulse Dot */}
+                <div className="mb-2 sm:mb-4">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-sky-300/40 backdrop-blur-md max-w-full overflow-hidden text-ellipsis whitespace-nowrap shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse shrink-0" />
+                    <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] uppercase text-sky-200 font-bold truncate">
+                      {heroSlides[currentSlide].eyebrow}
+                    </span>
+                  </div>
+                </div>
 
-            {/* Editorial Headline with Fluid Clamp on Mobile, Preserved Huge Size on Desktop */}
-            <div className="mb-6 sm:mb-10 max-w-6xl">
-              <h1 className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[1.05] lg:leading-[0.9] font-black tracking-tight text-white drop-shadow-sm">
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="block overflow-hidden"
-                >
-                  ENGINEERED TO
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="block overflow-hidden pt-0.5 lg:pt-1"
-                >
-                  TRANSFORM<span className="text-[#38BDF8]">.</span> WE EMPOWER
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="block overflow-hidden pt-0.5 lg:pt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#BAE6FD] via-[#E0F2FE] to-white"
-                >
-                  CONTINUOUS INDUSTRY<span className="text-[#38BDF8]">.</span>
-                </motion.span>
-              </h1>
+                {/* Editorial Headline */}
+                <div className="mb-4 sm:mb-6 max-w-6xl">
+                  <h1 className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[1.05] lg:leading-[0.9] font-black tracking-tight text-white drop-shadow-sm">
+                    <span className="block overflow-hidden">
+                      {heroSlides[currentSlide].line1}
+                    </span>
+                    <span className="block overflow-hidden pt-0.5 lg:pt-1">
+                      {heroSlides[currentSlide].line2}
+                    </span>
+                    <span className="block overflow-hidden pt-0.5 lg:pt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#BAE6FD] via-[#E0F2FE] to-white">
+                      {heroSlides[currentSlide].line3}
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Paragraph & Full-Width Stacked CTAs */}
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-16 w-full border-t border-sky-300/30 pt-6 sm:pt-8">
+                  <p className="max-w-xl text-xs sm:text-base md:text-lg text-sky-100 leading-relaxed font-normal">
+                    {heroSlides[currentSlide].description}
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
+                    <Link
+                      to={heroSlides[currentSlide].primaryBtnLink}
+                      className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl sm:rounded-full bg-gradient-to-r from-[#1E3AAE] to-[#0284C7] bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-[position:100%_50%] text-xs sm:text-sm font-bold tracking-wider uppercase text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 touch-target-min"
+                    >
+                      <span>{heroSlides[currentSlide].primaryBtnText}</span>
+                      <span className="flex size-7 items-center justify-center rounded-full bg-white/20">
+                        <ArrowRight className="size-4 card-arrow-shift" />
+                      </span>
+                    </Link>
+
+                    <button
+                      onClick={() => scrollToSection(heroSlides[currentSlide].secondaryBtnAction)}
+                      className="group w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-xl sm:rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-xs sm:text-sm font-bold tracking-wider uppercase text-white transition-all duration-300 touch-target-min"
+                    >
+                      <span>{heroSlides[currentSlide].secondaryBtnText}</span>
+                      <ArrowUpRight className="size-4 text-sky-200 card-arrow-shift" />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Interactive Carousel Slide Indicators & Controls (Rexel-Style with Dynamic Progress) */}
+            <div className="flex items-center justify-between pt-8 sm:pt-12">
+              <div className="flex items-center space-x-2.5">
+                {heroSlides.map((slide, sIdx) => {
+                  const isActive = currentSlide === sIdx
+                  return (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      onClick={() => setCurrentSlide(sIdx)}
+                      aria-label={`Go to slide ${sIdx + 1}`}
+                      className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
+                        isActive
+                          ? 'w-10 bg-gradient-to-r from-[#38BDF8] to-[#0284C7] shadow-md shadow-sky-400/50'
+                          : 'w-2.5 bg-white/35 hover:bg-white/60'
+                      }`}
+                    />
+                  )
+                })}
+              </div>
+
+              <div className="flex items-center space-x-2 text-xs font-mono text-sky-200">
+                <span className="font-bold text-white">0{currentSlide + 1}</span>
+                <span className="text-white/40">/</span>
+                <span className="text-white/60">0{heroSlides.length}</span>
+              </div>
             </div>
-
-            {/* Paragraph & Full-Width Stacked CTAs in Mobile Thumb Zone */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-16 w-full border-t border-sky-300/30 pt-6 sm:pt-8"
-            >
-              <p className="max-w-xl text-xs sm:text-base md:text-lg text-sky-100 leading-relaxed font-normal">
-                SIF Systems (SIF-EPX Group) delivers turnkey chemical process equipment, type-tested IEC 61439 switchboards, SCADA automation, and industrial air emissions scrubbers designed to maximize productivity and regulatory compliance across India.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 shrink-0 w-full sm:w-auto">
-                <button
-                  onClick={() => scrollToSection('epcm-pipeline')}
-                  className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl sm:rounded-full bg-gradient-to-r from-[#1E3AAE] to-[#0284C7] text-xs sm:text-sm font-bold tracking-wider uppercase text-white shadow-lg active:scale-95 transition-all touch-target-min"
-                >
-                  <span>Explore EPCM Lifecycle</span>
-                  <span className="flex size-7 sm:size-9 items-center justify-center rounded-full bg-white/20">
-                    <ArrowUpRight className="size-4" />
-                  </span>
-                </button>
-
-                <span className="hidden sm:block text-sky-300/40">|</span>
-
-                <button
-                  onClick={() => scrollToSection('pid-simulator')}
-                  className="w-full sm:w-auto text-center py-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-sky-200 hover:text-white transition-colors underline underline-offset-4 touch-target-min"
-                >
-                  Interactive P&amp;ID Simulator
-                </button>
-              </div>
-            </motion.div>
 
           </div>
         </div>
@@ -1571,10 +1646,10 @@ function SifBespokeHomeThree() {
             
             {/* Left Column: Narrative & Action (Text first on mobile) */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-6 flex flex-col space-y-4 sm:space-y-6"
             >
               <div className="inline-flex items-center space-x-2 w-max px-3 py-1 rounded-full bg-sky-100 border border-sky-300">
@@ -1737,10 +1812,10 @@ function SifBespokeHomeThree() {
           
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
           >
             <div>
@@ -2389,7 +2464,13 @@ function SifBespokeHomeThree() {
           <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             {/* Left Narrative */}
-            <div className="flex flex-col items-start lg:pr-6 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-start lg:pr-6 space-y-6"
+            >
               <span className="text-xs font-mono font-bold tracking-widest text-[#001B79] uppercase px-3 py-1 rounded-full bg-sky-100 border border-sky-200">
                 WHAT WE DO
               </span>
@@ -2413,16 +2494,22 @@ function SifBespokeHomeThree() {
               <div className="pt-4">
                 <Link
                   to="/services"
-                  className="inline-flex items-center space-x-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#001B79] to-[#0284C7] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-sky-200 hover:opacity-95"
+                  className="group inline-flex items-center space-x-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#031A5D] via-[#1E3AAE] to-[#0284C7] bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-[position:100%_50%] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md shadow-sky-200 hover:shadow-lg active:scale-95"
                 >
                   <span>Explore All Services</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 card-arrow-shift" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Tall Industrial Image */}
-            <div className="relative w-full h-[450px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl border border-sky-200 bg-slate-900">
+            {/* Right Tall Industrial Image with subtle scale */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative w-full h-[450px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl border border-sky-200 bg-slate-900"
+            >
               <img
                 src="/images/process-piping.jpg"
                 alt="Continuous Chemical Facility Installation"
@@ -2442,7 +2529,7 @@ function SifBespokeHomeThree() {
                   Dahej Chemical Zone • Turnkey EPC Execution
                 </p>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -2732,23 +2819,27 @@ function SifBespokeHomeThree() {
             </MobileSnapSlider>
           </div>
 
-          {/* Desktop / Tablet View (md and up): 3-column grid */}
+          {/* Desktop / Tablet View (md and up): 3-column grid with motion stagger */}
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {companyInfo.usp.map((u) => (
-              <div
+            {companyInfo.usp.map((u, idx) => (
+              <motion.div
                 key={u.id}
-                className="group rounded-3xl border border-sky-200/80 bg-gradient-to-br from-sky-50/50 via-white to-white p-7 sm:p-8 shadow-xs hover:border-blue-500 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="group rounded-2xl border border-slate-200/90 bg-white p-7 sm:p-8 shadow-xs hover:border-[#93C5FD] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#001B79] text-white font-mono font-bold text-sm shadow-md group-hover:bg-[#0284C7] transition-colors">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#031A5D] text-white font-mono font-bold text-sm shadow-sm group-hover:bg-[#1E3AAE] group-hover:scale-105 transition-all duration-300">
                       0{u.id}
                     </span>
-                    <span className="text-[10px] font-mono font-bold text-sky-700 bg-sky-100 px-2.5 py-0.5 rounded-full uppercase">
+                    <span className="text-[10px] font-mono font-bold text-[#1E3AAE] bg-blue-50 px-2.5 py-0.5 rounded-full uppercase border border-blue-100">
                       USP {u.id}
                     </span>
                   </div>
-                  <h3 className="text-lg font-black text-slate-900 group-hover:text-blue-950 transition-colors mb-2">
+                  <h3 className="text-lg font-black text-slate-900 group-hover:text-[#031A5D] transition-colors mb-2">
                     {u.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
@@ -2756,11 +2847,11 @@ function SifBespokeHomeThree() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-900">
+                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#031A5D]">
                   <span>SIF-EPX Assured</span>
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform duration-300" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 

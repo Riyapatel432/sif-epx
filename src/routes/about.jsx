@@ -31,7 +31,6 @@ import { clientsList } from '../data/clientsData'
 import { TechnicalBlueprintGridSVG } from '../components/visuals/TechnicalBlueprintGridSVG'
 import CountUp from '../components/reactbits/CountUp'
 import AuroraWaves from '../components/reactbits/AuroraWaves'
-import BlurText from '../components/reactbits/BlurText'
 import ShinyText from '../components/reactbits/ShinyText'
 import { MobileTabs, TabPanel } from '../components/ui/MobileTabs'
 import { MobileBottomSheet } from '../components/ui/MobileBottomSheet'
@@ -603,7 +602,7 @@ function AboutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#0284C7] selection:text-white antialiased overflow-x-hidden">
       
       {/* ========================================================================= */}
       {/* 1. HERO — LAYERED BLUEPRINT, GLOWING ORBS, AND PROCESS VECTOR COMPOSITION */}
@@ -635,14 +634,14 @@ function AboutPage() {
             </div>
 
             {/* Headline with Fluid Clamp on Mobile, Huge on Desktop */}
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] sm:leading-[1.05] text-white">
-              <BlurText
-                text="About SIF Systems & SIF-EPX Group"
-                delay={40}
-                direction="top"
-                className="text-white"
-              />
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] sm:leading-[1.05] text-white"
+            >
+              About SIF Systems & SIF-EPX Group
+            </motion.h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-lg md:text-xl text-sky-100 max-w-3xl leading-relaxed font-normal">
@@ -657,10 +656,9 @@ function AboutPage() {
       {/* ========================================================================= */}
       <div className="relative z-20 -mt-6 sm:-mt-12 md:-mt-16 lg:-mt-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="rounded-2xl sm:rounded-3xl border border-sky-300/60 bg-white/95 backdrop-blur-xl shadow-xl sm:shadow-2xl shadow-sky-900/15 p-3.5 sm:p-6 lg:p-8"
         >
           {/* Mobile 2-column grid / Desktop 6-column horizontal divide strip */}
@@ -837,10 +835,10 @@ function AboutPage() {
             
             {/* Featured Bento Card: Our Vision (7 Columns) */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-7 relative overflow-hidden rounded-3xl border border-sky-300 bg-gradient-to-br from-white via-sky-50/40 to-white p-8 lg:p-12 shadow-xl shadow-sky-100/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
             >
               {/* Watermark Icon */}
@@ -876,10 +874,10 @@ function AboutPage() {
               
               {/* Mission Card */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-3xl border border-sky-200 bg-white p-7 lg:p-8 shadow-lg shadow-sky-100/50 hover:-translate-y-1 transition-all duration-300 flex-1 flex flex-col justify-between group"
               >
                 <AnimatedMissionTargetIcon className="absolute -bottom-6 -right-6 w-36 h-36 text-sky-100/40 pointer-events-none group-hover:scale-105 transition-transform" />
@@ -903,10 +901,10 @@ function AboutPage() {
 
               {/* Ethics Card */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-3xl border border-sky-200 bg-white p-7 lg:p-8 shadow-lg shadow-sky-100/50 hover:-translate-y-1 transition-all duration-300 flex-1 flex flex-col justify-between group"
               >
                 <AnimatedEthicsHeartIcon className="absolute -bottom-6 -right-6 w-36 h-36 text-emerald-100/40 pointer-events-none group-hover:scale-105 transition-transform" />
@@ -1014,8 +1012,8 @@ function AboutPage() {
                     key={m.year}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                    transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                     className={`flex flex-col justify-between rounded-3xl border border-sky-200 bg-white p-7 shadow-xl shadow-sky-100/50 hover:border-[#0284C7] hover:-translate-y-2 transition-all duration-300 ${
                       isEven ? 'mb-12' : 'mt-12'
                     }`}
@@ -1079,7 +1077,8 @@ function AboutPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="relative rounded-2xl sm:rounded-3xl border-2 border-sky-400 bg-gradient-to-br from-white via-sky-50/60 to-white p-5 sm:p-8 shadow-xl sm:shadow-2xl shadow-sky-200/50 text-center max-w-md w-full hover:-translate-y-1 transition-all"
             >
               <div className="mx-auto mb-2.5 sm:mb-3 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#001B79] to-[#0284C7] text-white font-mono font-black text-base sm:text-lg shadow-md shadow-sky-300">
@@ -1095,10 +1094,7 @@ function AboutPage() {
               <p className="text-xs text-slate-600 mt-0.5 sm:mt-1 font-medium">
                 {companyInfo.leadership[0].role}
               </p>
-              <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-sky-100 flex items-center justify-center space-x-2 text-[10px] sm:text-[11px] font-mono text-emerald-700 font-bold">
-                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                <span>PDF 1 Page 5 Verified</span>
-              </div>
+              
             </motion.div>
 
             {/* Connecting Vertical Stem */}
@@ -1165,10 +1161,10 @@ function AboutPage() {
                   return (
                     <motion.div
                       key={pIdx}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: pIdx * 0.1 }}
+                      viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                      transition={{ duration: 0.7, delay: (pIdx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                       className="rounded-3xl border border-sky-200 bg-white p-6 text-center shadow-lg shadow-sky-100/50 hover:border-[#0284C7] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                     >
                       <div>
@@ -2050,10 +2046,10 @@ function AboutPage() {
             {companyInfo.longTermVision.points.map((point, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.08 }}
+                viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                transition={{ duration: 0.7, delay: (idx % 5) * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="rounded-3xl border border-sky-200 bg-white p-7 shadow-lg shadow-sky-100/50 hover:border-[#0284C7] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
@@ -2072,9 +2068,10 @@ function AboutPage() {
 
             {/* Direct Consultation Card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-3xl border border-sky-300 bg-gradient-to-br from-[#001B79] via-[#00229C] to-[#0284C7] text-white p-8 flex flex-col justify-between shadow-2xl shadow-sky-900/20 group hover:-translate-y-1.5 transition-all duration-300"
             >
               <div className="space-y-3">
@@ -2107,7 +2104,13 @@ function AboutPage() {
       {/* ========================================================================= */}
       <section className="relative overflow-hidden py-12 sm:py-20 lg:py-28 bg-gradient-to-b from-[#F0F9FF] via-white to-[#E0F2FE] border-t border-sky-200">
         <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-12">
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] bg-gradient-to-br from-[#001B79] via-[#0284C7] to-[#38BDF8] p-6 sm:p-12 lg:p-16 text-white shadow-xl sm:shadow-2xl border border-sky-300/40">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] bg-gradient-to-br from-[#001B79] via-[#0284C7] to-[#38BDF8] p-6 sm:p-12 lg:p-16 text-white shadow-xl sm:shadow-2xl border border-sky-300/40"
+          >
             <TechnicalBlueprintGridSVG className="opacity-25" isLightMode={false} />
 
             <div className="relative z-10 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
@@ -2161,7 +2164,7 @@ function AboutPage() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

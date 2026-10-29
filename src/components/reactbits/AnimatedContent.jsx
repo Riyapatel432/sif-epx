@@ -6,10 +6,10 @@ import { useRef, useEffect, useState } from 'react'
  */
 export default function AnimatedContent({
   children,
-  distance = 24,
+  distance = 30,
   direction = 'vertical',
   reverse = false,
-  duration = 0.6,
+  duration = 0.7,
   delay = 0,
   className = '',
 }) {
@@ -33,7 +33,7 @@ export default function AnimatedContent({
           if (ref.current) observer.unobserve(ref.current)
         }
       },
-      { threshold: 0.15 }
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
     )
 
     if (ref.current) {
@@ -53,11 +53,12 @@ export default function AnimatedContent({
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out will-change-[transform,opacity] ${className}`}
+      className={`transition-all will-change-[transform,opacity] ${className}`}
       style={{
         opacity: inView ? 1 : 0,
         transform,
         transitionDuration: `${duration}s`,
+        transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
         transitionDelay: `${delay}s`,
       }}
     >

@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 
 import Breadcrumbs from '../components/Breadcrumbs'
+import { motion } from 'motion/react'
 import ServiceCard from '../components/ServiceCard'
 import CTASection from '../components/CTASection'
 import StandardsBadgeBar from '../components/StandardsBadgeBar'
@@ -86,12 +87,12 @@ function ServicesIndexPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#EAF4FF] text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#1E40D8] selection:text-white">
 
       {/* ========================================================================= */}
       {/* 1. HERO WITH AURORAWAVES + BLURTEXT + CHIPSCROLLER NAVIGATOR              */}
       {/* ========================================================================= */}
-      <section className="relative pt-10 pb-12 sm:pt-16 sm:pb-20 bg-sif-hero text-white overflow-hidden border-b border-[#22B8F0]/30">
+      <section id="services-hero" className="relative pt-10 pb-12 sm:pt-16 sm:pb-20 bg-sif-hero text-white overflow-hidden border-b border-[#22B8F0]/30">
         <AuroraWaves speed={0.007} />
 
         {/* Ambient Glows */}
@@ -152,7 +153,7 @@ function ServicesIndexPage() {
       {/* ========================================================================= */}
       {/* 2. STANDARDS CERTIFICATION RAIL (Shared Section A)                        */}
       {/* ========================================================================= */}
-      <section className="py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
+      <section id="standards-compliance" className="reveal-fade-in py-6 sm:py-10 bg-sif-standards border-b border-sky-200/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <StandardsBadgeBar />
         </div>
@@ -161,7 +162,7 @@ function ServicesIndexPage() {
       {/* ========================================================================= */}
       {/* 3. CAPABILITIES SHOWCASE WITH STICKY FILTER & COMPACT ACCORDIONS          */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-18 bg-sif-sector-grid">
+      <section id="capabilities-catalog" className="py-10 sm:py-18 bg-sif-sector-grid">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
           
           <AnimatedContent distance={20} duration={0.6}>
@@ -200,11 +201,16 @@ function ServicesIndexPage() {
           <div className="block lg:hidden space-y-3">
             {filteredServices.map((service, idx) => {
               const isOpen = openServiceAccordionId === (service.slug || service.id)
+              const staggerDelay = (idx % 5) * 0.1
 
               return (
-                <div
+                <motion.div
                   key={service.id || service.slug}
                   id={`service-${service.slug || service.id}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                  transition={{ duration: 0.7, delay: staggerDelay, ease: [0.22, 1, 0.36, 1] }}
                   className="rounded-2xl border border-sky-200/90 bg-white overflow-hidden shadow-2xs scroll-mt-20 transition-all text-left"
                 >
                   {/* Collapsed Header */}
@@ -283,20 +289,31 @@ function ServicesIndexPage() {
                       </div>
                     </div>
                   )}
-                </div>
+                </motion.div>
               )
             })}
           </div>
 
           {/* =================================================================== */}
-          {/* DESKTOP VIEW (>= 1024px): 3-Column Card Grid                        */}
+          {/* DESKTOP VIEW (>= 1024px): 3-Column Card Grid with Motion Stagger   */}
           {/* =================================================================== */}
           <div className="hidden lg:grid grid-cols-3 gap-8 items-stretch">
-            {filteredServices.map((service) => (
-              <div key={service.id || service.slug} id={`service-${service.slug || service.id}`} className="scroll-mt-24 h-full">
-                <ServiceCard service={service} />
-              </div>
-            ))}
+            {filteredServices.map((service, idx) => {
+              const staggerDelay = (idx % 5) * 0.1
+              return (
+                <motion.div
+                  key={service.id || service.slug}
+                  id={`service-${service.slug || service.id}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
+                  transition={{ duration: 0.7, delay: staggerDelay, ease: [0.22, 1, 0.36, 1] }}
+                  className="scroll-mt-24 h-full"
+                >
+                  <ServiceCard service={service} />
+                </motion.div>
+              )
+            })}
           </div>
 
         </div>
